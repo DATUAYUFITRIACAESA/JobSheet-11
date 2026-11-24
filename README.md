@@ -229,7 +229,8 @@ public class CinemaWithScanner06 {
     }
 }
 ```
-   ![Example Image Output](/cinemascanner.png)
+   ![Example Image Output](/followingmenuarray.png)
+   
 * **Question 3:** Modify the program to handle a row or column number that does not exist (for example row 7 or column 0).   
   * **Answer:**
 1. A row below 1 or above 4 prints Invalid row number.
@@ -320,7 +321,7 @@ public class CinemaWithScanner06 {
     }
 }
 ```
- ![Example Image of Experiment 2 Output](/cinemascanner.png)
+ ![Example Image of Experiment 2 Output](/bintang.png)
  
 ### 3.3. Experiment 3: 2-Dimensional Array with Rows of Different Lengths
 
