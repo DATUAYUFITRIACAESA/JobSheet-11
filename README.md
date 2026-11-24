@@ -229,7 +229,7 @@ public class CinemaWithScanner06 {
     }
 }
 ```
-   ![Example Image of Experiment 2 Output](/cinemascanner.png)
+   ![Example Image Output](/cinemascanner.png)
 * **Question 3:** Modify the program to handle a row or column number that does not exist (for example row 7 or column 0).   
   * **Answer:**
 1. A row below 1 or above 4 prints Invalid row number.
@@ -488,8 +488,26 @@ public class task2dimentionalarray06 {
 
 ---
 ## 5: Reflection
+#### 5.1 
+Name two real-world situations that can be modeled with a 2-dimensional array, and 
+explain what the rows and columns represent. 
 
+1. A cinema seating system can use rows to represent seat rows and columns to represent seat positions. 
+
+2. A student grade table can use rows to represent students and columns to represent subjects or assessment scores.
+
+#### 5.2
+What is the main difference between a square 2-dimensional array and a jagged array? 
+Give one example use case for each. 
+
+A square 2-dimensional array has the same number of columns in every row, such as new int[3][4], and is suitable for a fixed-size calendar or chessboard. A jagged array has variable row lengths, such as new int[3][], and is suitable for student records where different students have different numbers of scores.
+
+#### 5.3
+In which part of this jobsheet did you make index mistakes most often? How can you 
+prevent them? 
+
+Index mistakes occurred most often when row or column numbers entered by users began from 1 but Java array indexes began from 0. They can be prevented by checking index ranges before access and converting user indexes with row - 1 and col - 1.
 
 ## 6: Conclusion
 
-These programs demonstrate how loops and conditional st
+The exercises demonstrate that Java arrays are accessed by zero-based indexes and can store data in a specific row and column. Two-dimensional arrays can be rectangular or jagged, allowing every row to have the same or different lengths, and array elements have default values such as null for String and 0 for int. Using Scanner allows users to enter and retrieve data, while validation is necessary to prevent invalid indexes and duplicate seat assignments. The for and foreach loops are useful for processing array elements, Arrays.toString() formats a one-dimensional array, and Arrays.deepToString() formats multidimensional arrays. Overall, the jobsheet shows that careful index conversion, range checking, and loop selection are important for handling arrays correctly.
