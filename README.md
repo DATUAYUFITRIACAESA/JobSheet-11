@@ -1,9 +1,9 @@
 # JOBSHEET 11 - 2-Dimensional Arrays
 
-**Identitas Mahasiswa:**
-* **Nama:** Datu Ayu Fitria Ceasa
+**Student Identity:**
+* **Name:** Datu Ayu Fitria Ceasa
 * **NIM:** 264107020087
-* **Kelas / No. Presensi:** 1I / 06
+* **Class / Present number:** 1I / 06
 
 ---
 
@@ -277,183 +277,95 @@ public class scoreSearch06 {
 ![Example Image of Experiment 4 Output](/linear.png)
 
 
-#### 3.4.3 Questions
+#### 3.4.2 Questions
 * **Question 1:** What if the number of students and the number of courses change? Modify the SIAKAD program so that both numbers can be decided while the program runs.
 
 Hint: use Scanner to read the two values, then create the array with new 
 int[numStudents][numCourses]. Make sure every loop uses length, not a fixed number.   
   * **Answer:** The loop runs once. A do-while loop executes its body before checking the condition. Since the first name is “cancel,” the break statement exits the loop during that first execution.
-* **Question 2:** Modify the Part A code so that the program accepts, as user input, the number of elements in the scores array, the array contents, and a value (key) to search for, and then prints the index position of 
-that value (key) in the array. 
+* **Question 2:** In Code 20, the variable totalPerStudent is declared inside the outer loop. What happens if you move the declaration outside the loop? Explain with an example of scores. 
   * **Answer:** The loop’s condition is while (true), which is always true. In practice, the loop stops when the customer enters “cancel” and the break statement runs.
-* **Question 3:** Modify the Part A program so that it displays the message "The value you are looking for was not found" in a more informative format when the value being searched for (key) does not exist in the array.   
+* **Question 3:** If some scores have not been entered yet (they hold the default value 0), how does this affect the average?   
   * **Answer:** true makes the loop repeat indefinitely unless it is exited another way, such as with the break statement.
-* **Question 4:** Explain step by step how the bubble sort algorithm in Part B works, using the test data provided!    
-  * **Answer:** true makes the loop repeat indefinitely unless it is exited another way, such as with the break statement.
-* **Question 5:** Modify the Part B program so that it sorts the array from the largest to the smallest value (descending), instead of from the smallest to the largest.   
-  * **Answer:** true makes the loop repeat indefinitely unless it is exited another way, such as with the break statement.
+
 
 ---
 
 ## 4: Assignment 
 
-The following is a list of tasks performed on this Jobsheet:
+Implement the flowchart of the survey exercise from the Programming Fundamentals (theory) 
+slides in a Java program. The survey data consists of 10 respondents and 6 questions with 
+answers from 1 to 5. The program must: 
 
-- [x] **Task 1:** Write a program that can store and manage student scores (integers). The program must provide features to:
       
-• Enter the number of student scores to be input. 
+• store the survey results in a 2-dimensional array; 
 
-• Enter each student score one by one. 
+• display the average score for each respondent; 
 
-• Calculate the average of all of the scores entered. 
+• display the average score for each question; 
 
-• Display the highest and lowest scores. 
-
-• Display all of the scores entered, along with their pass/fail status (PASS / FAIL).
+• display the overall average score.
       
-- [x] **Task 2:** Write a program that can manage food and beverage orders at a campus café. The program provides a predefined menu list, allows users to select menu items through a search feature, records orders, and calculates the total cost. 
-Café menu list (initialize an array of String at declaration):
-```
-String[] menu = {"Fried Rice", "Fried Noodles", "Toast", "French Fries", "Pulled 
-Tea", "Cappuccino", "Chocolate Ice"}; 
-int[] prices = {15000, 13000, 10000, 12000, 8000, 18000, 20000};
-```
-
-The program you write must meet the following requirements: 
-
-• Menu search feature: the user enters the name of the food or beverage they want to order, and the program searches for that name in the menu array using the linear search algorithm. If it is found, display its price; if it is not found, inform the user that the menu item is not available. 
-
-• Ordering feature: the user enters the number of items to order, then for each item selects a menu name (which must be validated to ensure it exists in the menu list). Store the names of the ordered items in a one-dimensional array that is separate from the main menu array. 
-
-• Calculate and display the total cost of all of the orders entered by the user. 
-
-• Display the list of orders that have been made, along with the total cost, in a neat and easy-to-read format. 
 
 ### 4.1 Task 1 Code Implementation
 
 ```java
 import java.util.Scanner;
 
-public class managingScore06 {
+public class task2dimentionalarray06 {
+    private static final int NUM_RESPONDENTS = 10;
+    private static final int NUM_QUESTIONS = 6;
+
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        int[][] surveyResults = new int[NUM_RESPONDENTS][NUM_QUESTIONS];
+        int overallTotal = 0;
 
-        System.out.print("Enter the number of student scores: ");
-        int count = input.nextInt();
+        for (int respondent = 0; respondent < NUM_RESPONDENTS; respondent++) {
+            System.out.println("Enter answers for respondent " + (respondent + 1) + ":");
 
-        if (count <= 0) {
-            System.out.println("The number of scores must be greater than 0.");
-            input.close();
-            return;
-        }
+            for (int question = 0; question < NUM_QUESTIONS; question++) {
+                int answer;
+                do {
+                    System.out.print("Question " + (question + 1) + " (1-5): ");
+                    answer = sc.nextInt();
+                    if (answer < 1 || answer > 5) {
+                        System.out.println("Please enter a score from 1 to 5.");
+                    }
+                } while (answer < 1 || answer > 5);
 
-        int[] scores = new int[count];
-        long total = 0;
-
-        for (int i = 0; i < scores.length; i++) {
-            System.out.print("Enter score for student #" + (i + 1) + ": ");
-            scores[i] = input.nextInt();
-            total += scores[i];
-        }
-
-        int highest = scores[0];
-        int lowest = scores[0];
-
-        for (int score : scores) {
-            if (score > highest) {
-                highest = score;
-            }
-            if (score < lowest) {
-                lowest = score;
+                surveyResults[respondent][question] = answer;
+                overallTotal += answer;
             }
         }
-        
-        double average = (double) total / scores.length;
 
-        System.out.println("\nAverage score: " + average);
-        System.out.println("Highest score: " + highest);
-        System.out.println("Lowest score: " + lowest);
-        System.out.println("Scores and status:");
-
-        for (int i = 0; i < scores.length; i++) {
-            String status = scores[i] > 70 ? "PASS" : "FAIL";
-            System.out.println("Student #" + (i + 1) + ": " + scores[i] + " (" + status + ")");
+        System.out.println("\nAverage score for each respondent:");
+        for (int respondent = 0; respondent < NUM_RESPONDENTS; respondent++) {
+            int respondentTotal = 0;
+            for (int question = 0; question < NUM_QUESTIONS; question++) {
+                respondentTotal += surveyResults[respondent][question];
+            }
+            System.out.printf("Respondent %d: %.2f%n",
+                    respondent + 1, (double) respondentTotal / NUM_QUESTIONS);
         }
+
+        System.out.println("\nAverage score for each question:");
+        for (int question = 0; question < NUM_QUESTIONS; question++) {
+            int questionTotal = 0;
+            for (int respondent = 0; respondent < NUM_RESPONDENTS; respondent++) {
+                questionTotal += surveyResults[respondent][question];
+            }
+            System.out.printf("Question %d: %.2f%n",
+                    question + 1, (double) questionTotal / NUM_RESPONDENTS);
+        }
+
+        System.out.printf("%nOverall average score: %.2f%n",
+                (double) overallTotal / (NUM_RESPONDENTS * NUM_QUESTIONS));
     }
 }
+
 ```
 ![](/managing.png)
-
-### 4.2 Task 2 Code Implementation
-```java
-import java.util.Scanner;
-
-public class campusCafeApp {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
-        String[] menu = {
-            "Fried Rice", "Fried Noodles", "Toast", "French Fries",
-            "Pulled Tea", "Cappuccino", "Chocolate Ice"
-        };
-        int[] prices = {15000, 13000, 10000, 12000, 8000, 18000, 20000};
-
-        System.out.println("Campus Cafe Menu:");
-        for (int i = 0; i < menu.length; i++) {
-            System.out.println(menu[i] + " - " + prices[i]);
-        }
-
-        System.out.print("\nEnter the number of items to order: ");
-        int itemCount = input.nextInt();
-        input.nextLine();
-
-        if (itemCount <= 0) {
-            System.out.println("The number of items must be greater than 0.");
-            input.close();
-            return;
-        }
-
-        String[] orders = new String[itemCount];
-        int totalCost = 0;
-
-        for (int i = 0; i < orders.length; i++) {
-            while (true) {
-                System.out.print("Enter menu item #" + (i + 1) + ": ");
-                String itemName = input.nextLine().trim();
-                int menuIndex = findMenuItem(menu, itemName);
-
-                if (menuIndex != -1) {
-                    orders[i] = menu[menuIndex];
-                    totalCost += prices[menuIndex];
-                    System.out.println(orders[i] + " - " + prices[menuIndex]);
-                    break;
-                }
-
-                System.out.println("That menu item is not available. Please try again.");
-            }
-        }
-
-        System.out.println("\nOrder Summary:");
-        for (int i = 0; i < orders.length; i++) {
-            int menuIndex = findMenuItem(menu, orders[i]);
-            System.out.println((i + 1) + ". " + orders[i] + " - " + prices[menuIndex]);
-        }
-        System.out.println("Total cost: " + totalCost);
-
-        input.close();
-    }
-
-    private static int findMenuItem(String[] menu, String itemName) {
-        for (int i = 0; i < menu.length; i++) {
-            if (menu[i].equalsIgnoreCase(itemName)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-}
-```
-![](/campuscafe.png)
 
 ---
 
