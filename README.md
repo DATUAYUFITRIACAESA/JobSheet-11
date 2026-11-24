@@ -229,7 +229,7 @@ public class CinemaWithScanner06 {
     }
 }
 ```
-   ![Example Image Output](/followingmenuarray.png)
+   ![Example Image Output](/menuarray.png)
    
 * **Question 3:** Modify the program to handle a row or column number that does not exist (for example row 7 or column 0).   
   * **Answer:**
